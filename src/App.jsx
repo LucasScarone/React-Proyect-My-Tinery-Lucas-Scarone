@@ -1,6 +1,6 @@
-import { Cities } from "./componets/views/Cities/Cities";
-import Home from "./componets/views/Home/Home"
 import { BrowserRouter, Routes, Route  } from "react-router-dom";
+import {Home} from "./views/Home"
+import { Cities } from "./views/Cities";
 function App() {
 
   return (
