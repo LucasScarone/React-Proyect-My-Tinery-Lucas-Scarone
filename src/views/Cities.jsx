@@ -3,7 +3,6 @@ import { Layoud } from '../componets/ComponetDefault/Layoud'
 import Header from '../componets/ComponetDefault/Header'
 import { GetCityData } from '../service/CityData'
 import { CityCard } from '../componets/CityCard'
-import { BGH } from '../componets/BG-1'
 
 
 
@@ -37,23 +36,23 @@ export const Cities  = () => {
 
   return (
     <Layoud >
-      <BGH>
-      <div className="bg-gradient-to-b from-indigo-600 via-pink-500 to-amber-300">
-       <Header></Header>
+      <div className=''> 
+        <div className="bg-gradient-to-b from-indigo-600 via-pink-500 to-amber-300">
+        <Header></Header>
+        </div>
+        <search className='w-full flex justify-center mt-5 '>
+          <input 
+          type='text'
+          placeholder='Example: New York'
+          className='outline-none bg-slate-700 text-white w-2/3 rounded-lg pl-3 h-8 md:h-10 xl:h-12 2xl:h-20  2xl:text-3xl'
+          onInput={e}
+          ref={inputBusqueda}
+          />
+        </search>
+        <section className="flex flex-wrap justify-center">
+        {filtrado.length > 0 && CTSCard}
+        </section>
       </div>
-      <search className='w-full flex justify-center mt-5 '>
-        <input 
-        type='text'
-        placeholder='Example: New York'
-        className='outline-none text-black w-2/3 rounded-lg pl-3 h-8 md:h-10 xl:h-12 2xl:h-20  2xl:text-3xl'
-        onInput={e}
-        ref={inputBusqueda}
-        />
-      </search>
-      <section className="flex flex-wrap justify-center">
-       {filtrado.length > 0 && CTSCard}
-      </section>
-      </BGH>
     </Layoud>
     )
 }
