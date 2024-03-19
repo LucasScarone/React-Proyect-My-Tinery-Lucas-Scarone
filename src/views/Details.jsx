@@ -5,6 +5,7 @@ import { useNavigate, useParams } from 'react-router-dom'
 import { GetCityId } from '../service/CityData'
 import { Loading } from '../componets/ComponetDefault/Loading'
 import Swal from 'sweetalert2'
+import { Itinerary } from '../componets/Itinerary'
 
 export const Details = () => {
     const params= useParams()
@@ -15,7 +16,6 @@ export const Details = () => {
 
     useEffect (()=>{
         GetCityId(params.id).then((res ) => {
-            console.log(res);
             if (res.name) {
                 setCt(res)
             }else{
@@ -29,34 +29,29 @@ export const Details = () => {
             }
         }).finally(()=>setloading(false))
     },[])
-
      
-    
-  
 
 
   return(
     <>
      {loading ? (<Loading></Loading>): (
+    <div className='bg-gradient-to-b from-indigo-300 via-pink-300 to-amber-200'>
         <Layoud>
             <Header>
             </Header>
-            <div className ="w-full min-h-screen flex flex-col text-white">
-                <div className ="flex grow flex-wrap items-center justify-center bg-gradient-to-b from-black via-indigo-500 to-purple-500">
-                    <main className =" flex-wrap ">
-                        <div className ="flex flex-wrap">
-                            <img className ="w-full h-1/2 md:pl-2  md:w-[350px] md:h-[300px] lg:w-1/2 lg:h-1/2" src={Ct.image} alt={Ct.name}/>
-                            <div className ="px-5 md:w-1/2">
-                                <h2 className ="text-center font-bold text-3xl">{Ct.name}</h2>
-                                <h3 className ="font-bold text-2xl">{Ct.country}</h3>
-                                <h4 className ="font-bold text-white">{Ct.country}</h4>
-                                <p>{Ct.overview}</p>
-                            </div>
-                        </div>
-                    </main>
+            <div className="flex flex-wrap mt-5 justify-center">
+                <img className="w-full h-1/2  rounded-md  md:w-[350px] md:h-[300px] lg:w-1/2 lg:h-1/2 " src={Ct.image} alt={Ct.name}/>
+                <div className="ml-4 md:w-[45%]">
+                    <h2 className="text-center font-bold text-4xl xl:text-6xl 2xl:text-8xl">{Ct.name}</h2>
+                    <h2 className="font-bold text-3xl xl:text-4xl 2xl:text-7xl">{Ct.country}</h2>
+                    <h3 className="font-bold text-2xl xl:text-3xl 2xl:text-5xl">{Ct.language}</h3>
+                    <h4 className="font-bold text-black xl:text-xl 2xl:text-5xl">{Ct.currency}</h4>
+                    <p className='xl:text-2xl 2xl:text-4xl'>{Ct.description}</p>
                 </div>
+                {Ct.itineraries.length > 0 && <Itinerary data ={Ct.itineraries}name={Ct.name} ></Itinerary>}
             </div>
         </Layoud>
+    </div>
     )
     }
     </>

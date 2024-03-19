@@ -1,1 +1,234 @@
-el hero lo tiene el home solo
+@@ -0,0 +1,189 @@
+ primero de todo una carpeta redux
+ dentro de es carpeta otra mas para los acti0ons y reducer 
+ creamos el archivo store dentrode la carpeta reduX 
+
+
+
+
+
+ creamos el store
+
+import { configureStore } from '@reduxjs/toolkit'
+
+
+const store = {
+    Cities : CitiesReducer
+}
+
+export default configureStore( {
+    reducer: store
+} )
+
+
+
+
+
+
+
+despues se pone el Provider asi:
+se importa:
+
+el sstore para parametro
+
+import store from "./redux/store";
+
+el provider para que funcione las funcionalidades
+
+import { Provider } from "react-redux";
+
+afruera el
+
+
+
+BrowserRuter
+
+<Provider store={store}>
+dentro el contenico
+</Provider>
+
+BrowserRuter
+
+
+
+
+
+
+
+
+
+
+3 ahoraCREAMOS el archivo Cityreducer
+dentro de reducers
+y impotamos 
+para crear 
+ import { createReducer } from "@reduxjs/toolkit";
+
+import { filterByName, load } from '../actions/championsActions'
+
+y creamos la funcion reducer
+
+const initialState = {
+
+    para tener las 15 cuidades
+
+    all: [],
+
+    esto es para tener las cudades filtradas
+
+    filtered: [],
+
+    search no lo necesito
+
+    search: ""
+}
+
+
+
+
+
+depues dejamos preparado el builder 
+
+
+const reducer = createReducer( initialState, ( builder ) => {})
+
+
+
+
+export default reducer
+
+
+
+
+ahora conectamos el reducer importandolo an store
+con:
+
+import CityReducer from './reducers/CityReducer'
+
+
+
+ahora voy al componente donde lo voy a usar en este caso seria City y caps home 
+
+import para usar lo que tengo en el store y dispach para cambiar lo que tngo en el sotore
+desde city o otro componente 
+
+        eso para usar
+            |           esto para despacahr cambios al reducer        
+            |                   |
+            |                   |
+            |                   |
+import { useSelector, useDispatch } from "react-redux";
+
+
+
+const { all, filtered, search } = useSelector((store) => store.City);
+
+
+
+
+
+  const dispatch = useDispatch();
+
+
+
+
+aca creo el accion para el dispach
+aca importo 
+  import { createAction } from "@reduxjs/toolkit";
+
+aca hago la fun cion que  va a recibir los personjes y lo van a mandar al store
+
+esto es el accion
+export const load = createAction( 'loadChampions', (champions) => {
+    return {
+        payload: champions
+    }
+} )
+
+esto lo voy a usar en City
+y en el reducer 
+
+
+
+aca lo uso al reduce 
+
+
+const reducer = createReducer( initialState, ( builder ) => {
+
+aca le agregamos un caso para que cuando lo eschuche realize la accion
+                            esto es como se encuenntra el store 
+                            y es para que no se borre nada 
+                                |
+                                |
+                                |   esta es la acion que tiene que recibir del
+                                |   action
+                                |   |
+                                |   |
+    builder.addCase( load, ( state, action ) => {
+        return { ...state, all: action.payload, filtered: action.payload }
+    } )
+    ...state copia el store
+    
+
+
+ahora importo la accion load en city
+
+y la ccion la dispacho dentro de la promesa donde recibo el array con los ob de city
+
+
+
+  useEffect(() => {
+    if (all.length == 0) {
+      getChampions().then((data) => {
+        dispatch(load(data));
+      });
+    }
+  }, []);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  reduc action
+
+export const filterByName = createAction( 'filterByName', ( value ) =>{
+    return {
+        payload : value
+    }
+} )
+
+
+
+
+
+  const inputBusqueda = useRef(null);
+
+
+  const { all, filtered, search } = useSelector((store) => store.champions);
+
+
+  const handleInput = () => {
+    dispatch(filterByName(inputBusqueda.current.value));
+  };
+
+
+
+
+
+
+
+usar palabras claves 
+pedir a cgpt la palabras claves 
+

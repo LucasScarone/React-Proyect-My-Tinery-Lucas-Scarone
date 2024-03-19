@@ -1,7 +1,7 @@
 import React from "react"
 
 export const CarruselItems = ({dt}) => {
-  console.log(dt);
+
   return (
       <article className="w-2/4 p-3 lg:h-[220px] xl:h-[260px] 2xl:h-[390px] ">
           <img className="w-full h-[125px] object-cover md:h-[165px] lg:h-[155px] xl:h-[180px] 2xl:h-[320px] 2xl:text-3xl rounded-t-2xl" src={dt.image} alt=""/>
